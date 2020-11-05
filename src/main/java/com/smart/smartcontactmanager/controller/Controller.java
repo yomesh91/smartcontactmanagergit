@@ -3,6 +3,7 @@ package com.smart.smartcontactmanager.controller;
 import com.smart.smartcontactmanager.dao.UserRepository;
 import com.smart.smartcontactmanager.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,8 @@ import java.util.Scanner;
 @org.springframework.stereotype.Controller
 public class Controller {
     @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
     private UserRepository userRepository;
 
     @GetMapping("/sign-up")
@@ -24,6 +27,7 @@ public class Controller {
     public String registerUser(@ModelAttribute("user") User user, @RequestParam(value = "agreement",defaultValue = "false") boolean agreement, Model model){
         user.setRole("ROLE_USER");
         user.setEnabled(true);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         System.out.println(agreement);
         System.out.println(user.getEmail());
         userRepository.save(user);
