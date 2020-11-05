@@ -1,1 +1,7 @@
 com/smart/smartcontactmanager/SmartcontactmanagerApplication.class
+com/smart/smartcontactmanager/dao/UserRepository.class
+com/smart/smartcontactmanager/controller/UserController.class
+com/smart/smartcontactmanager/entities/User.class
+com/smart/smartcontactmanager/controller/Controller.class
+com/smart/smartcontactmanager/entities/Contact.class
+com/smart/smartcontactmanager/config/MyConfig.class
