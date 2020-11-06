@@ -32,6 +32,11 @@ public class Controller {
         userRepository.save(user);
         return "signup";
     }
+    @GetMapping("/login")
+    public String login(Model model){
+        return "login";
+    }
+
    /* @GetMapping("/print")
     public String print(Model model){
         List<String> list = new ArrayList<String>();
