@@ -29,7 +29,6 @@ public class Controller {
         user.setEnabled(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         System.out.println(agreement);
-        System.out.println(user.getEmail());
         userRepository.save(user);
         return "signup";
     }
