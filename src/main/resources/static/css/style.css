@@ -8,7 +8,11 @@ body{
 .banner{
     width:100%;
     height:93vh;
-    background:url(../images/nirav.png);
+    background:linear-gradient(rgba(0,0,0,.8),rgba(0,0,0,.8)),url(../images/pp.jpeg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    color:white;
 }
 .my-card{
 padding: 20px;
@@ -26,4 +30,14 @@ background:#FFFFFF;
 }
 #login .container #login-row #login-column #login-box #login-form #register-link {
   margin-top: -85px;
+}
+.sidebar{
+    width: 18%;
+    background:white;
+    height: 100%;
+    position: fixed;
+    padding-top: 45px;
+}
+.section{
+    margin-left: 20%;
 }
