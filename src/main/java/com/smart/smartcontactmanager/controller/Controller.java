@@ -20,12 +20,13 @@ public class Controller {
     private UserRepository userRepository;
     @GetMapping("/")
     public String home(Model model){
-        model.addAttribute("title","home page");
+        model.addAttribute("title","home");
         return "home";
     }
 
     @GetMapping("/sign-up")
-    public String signUp(){
+    public String signUp(Model model) {
+        model.addAttribute("title","sign-up");
         return "signup";
     }
     @PostMapping("/register-user")
@@ -39,6 +40,7 @@ public class Controller {
     }
     @GetMapping("/login")
     public String login(Model model){
+        model.addAttribute("title","login");
         return "login";
     }
 
