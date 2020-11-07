@@ -18,6 +18,11 @@ public class Controller {
     private BCryptPasswordEncoder passwordEncoder;
     @Autowired
     private UserRepository userRepository;
+    @GetMapping("/")
+    public String home(Model model){
+        model.addAttribute("title","home page");
+        return "home";
+    }
 
     @GetMapping("/sign-up")
     public String signUp(){
