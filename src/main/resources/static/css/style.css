@@ -31,6 +31,19 @@ background:#FFFFFF;
 #login .container #login-row #login-column #login-box #login-form #register-link {
   margin-top: -85px;
 }
+@media only screen and (max-width: 600px){
+.sidebar{
+    display: none;
+    width: 100% !important;
+    background: white;
+    height: 100vh;
+    position: fixed;
+    padding-top: 20px;
+}
+.section{
+    margin-left: 0% !important;
+}
+}
 .sidebar{
     width: 18%;
     background:white;
@@ -56,4 +69,11 @@ margin-top: 10px;
 }
 .section{
     margin-left: 20%;
+}
+.sidebar .crossbtn{
+position: absolute;
+top: 0;
+right: 35px;
+font-size: 36px;
+cursor: pointer;
 }

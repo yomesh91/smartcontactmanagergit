@@ -7,12 +7,13 @@
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <title th:text="${title}">Base</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand text-white">Smart Contact Manager</a>
+    <a class="navbar-brand text-white font-weight-bold">Smart Contact Manager</a>
     <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
             data-target="#navbarNav" data-toggle="collapse" type="button">
         <span class="navbar-toggler-icon"></span>
@@ -32,16 +33,18 @@
     </div>
 </nav>
 <div class="sidebar">
-    <a class="item" href="#">Home</a>
-    <a class="item" href="#">View Contacts</a>
-    <a class="item" href="#">Add Contacts</a>
-    <a class="item" href="#">Your Profile</a>
-    <a class="item" href="#">Settings</a>
-    <a class="item" href="#">Logout</a>
+    <span onclick="toggleSidebar()" class="crossbtn">&times;</span>
+    <a class="item font-weight-bold" href="#"><i class="fas fa-home"></i>Home</a>
+    <a class="item font-weight-bold" href="#"><i class="fas fa-id-card-alt"></i>View Contacts</a>
+    <a class="item font-weight-bold" href="#"><i class="fas fa-pencil-alt"></i>Add Contacts</a>
+    <a class="item font-weight-bold" href="#"><i class="fas fa-user-circle"></i>Your Profile</a>
+    <a class="item font-weight-bold" href="#"><i class="fas fa-cog"></i>Settings</a>
+    <a class="item font-weight-bold" href="#"><i class="fas fa-sign-out-alt"></i>Logout</a>
     <div class="divider"></div>
 
 </div>
 <div class="section">
+    <i onclick="toggleSidebar()" class="fas fa-bars m-3"></i>
     <div th:replace="${section}"></div>
 </div>
 <script crossorigin="anonymous"
@@ -53,5 +56,6 @@
 <script crossorigin="anonymous"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script th:src="@{/js/script.js}"></script>
 </body>
 </html>
