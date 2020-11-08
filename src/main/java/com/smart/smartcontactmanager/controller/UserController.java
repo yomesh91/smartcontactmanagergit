@@ -25,13 +25,13 @@ public class UserController {
     }
     @RequestMapping("/index")
     public String dashboard(Model model, Principal principal){
-
+        model.addAttribute("title","Home");
        return "normal/user_dashboard";
     }
-    @GetMapping("/open-form")
-    public String openContactForm(Model model){
-        model.addAttribute("title","Contact Form");
-        return "normal/contact_form";
+    @GetMapping("/add-contact")
+    public String addContact(Model model){
+        model.addAttribute("title","Add Contact");
+        return "normal/add_contact";
     }
 
 }
