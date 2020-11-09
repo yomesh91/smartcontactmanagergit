@@ -1,6 +1,7 @@
 package com.smart.smartcontactmanager.controller;
 
 import com.smart.smartcontactmanager.dao.UserRepository;
+import com.smart.smartcontactmanager.entities.Contact;
 import com.smart.smartcontactmanager.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,7 @@ public class UserController {
     @GetMapping("/add-contact")
     public String addContact(Model model){
         model.addAttribute("title","Add Contact");
+        model.addAttribute("contact",new Contact());
         return "normal/add_contact";
     }
 

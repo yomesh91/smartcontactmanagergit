@@ -12,7 +12,7 @@
     <title th:text="${title}">Base</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand text-white font-weight-bold">Smart Contact Manager</a>
     <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
             data-target="#navbarNav" data-toggle="collapse" type="button">
@@ -21,18 +21,18 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto text-uppercase">
             <li class="nav-item">
-                <a class="navbar text-light"><span th:text="${user.name}"></span></a>
+                <a class="navbar text-white font-weight-bold"><span th:text="${user.name}"></span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{/}">Home<span class="sr-only">(current)</span></a>
+                <a class="nav-link font-weight-bold ml-3" th:href="@{/}">Home<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" th:href="@{/logout}">Logout</a>
+            <li class="nav-item active">
+                <a class="nav-link font-weight-bold ml-3" th:href="@{/logout}">Logout<span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>
 </nav>
-<div class="sidebar">
+<div class="sidebar mt-2">
     <span onclick="toggleSidebar()" class="crossbtn">&times;</span>
     <a class="item font-weight-bold" th:href="@{/user/index}"><i class="fas fa-home"></i>Home</a>
     <a class="item font-weight-bold" href="#"><i class="fas fa-id-card-alt"></i>View Contacts</a>
@@ -43,7 +43,7 @@
     <div class="divider"></div>
 
 </div>
-<div class="section">
+<div class="section mt-5">
     <i onclick="toggleSidebar()" class="fas fa-bars m-3"></i>
     <div th:replace="${section}"></div>
 </div>
