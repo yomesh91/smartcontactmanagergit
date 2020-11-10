@@ -3,6 +3,7 @@ package com.smart.smartcontactmanager.controller;
 import com.smart.smartcontactmanager.dao.UserRepository;
 import com.smart.smartcontactmanager.entities.Contact;
 import com.smart.smartcontactmanager.entities.User;
+import com.smart.smartcontactmanager.helper.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -48,7 +50,7 @@ public class UserController {
     public String registerContact(
             @ModelAttribute Contact contact,
             @RequestParam("profileImage") MultipartFile file,
-            Principal principal) {
+            Principal principal, HttpSession session) {
         try {
             String email = principal.getName();
             User user = userRepository.getUserByUserName(email);
@@ -68,9 +70,11 @@ public class UserController {
             userRepository.save(user);
             System.out.println(contact);
             System.out.println("Added to database");
+            session.setAttribute("message", new Message("Your Contact is Added Successfully..","success"));
         } catch (Exception e) {
             System.out.println("Error " + e.getMessage());
             e.printStackTrace();
+            session.setAttribute("message", new Message("Something Went Wrong..","danger"));
         }
         return "normal/add_contact";
     }
