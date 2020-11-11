@@ -2,11 +2,13 @@ package com.smart.smartcontactmanager.controller;
 
 import com.smart.smartcontactmanager.dao.UserRepository;
 import com.smart.smartcontactmanager.entities.User;
+import com.smart.smartcontactmanager.helper.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +29,34 @@ public class Controller {
     @GetMapping("/sign-up")
     public String signUp(Model model) {
         model.addAttribute("title","sign-up");
+        model.addAttribute("user",new User());
         return "signup";
     }
     @PostMapping("/register-user")
-    public String registerUser(@ModelAttribute("user") User user, @RequestParam(value = "agreement",defaultValue = "false") boolean agreement, Model model){
-        user.setRole("ROLE_USER");
-        user.setEnabled(true);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        System.out.println(agreement);
-        userRepository.save(user);
+    public String registerUser(@ModelAttribute("user") User user, @RequestParam(value = "agreement",defaultValue = "false") boolean agreement, Model model, HttpSession session){
+       try{
+           if(!agreement){
+               throw new Exception("You have not check me out");
+           }
+           user.setRole("ROLE_USER");
+           user.setEnabled(true);
+           user.setImageUrl("default.png");
+           user.setPassword(passwordEncoder.encode(user.getPassword()));
+           User user1 = userRepository.save(user);
+           model.addAttribute("user",user1);
+           Message msg = new Message();
+           msg.setContent("Successfully Registered!!");
+           msg.setType("alert-success");
+           session.setAttribute("msg",msg);
+
+       }catch(Exception e){
+           e.printStackTrace();
+           model.addAttribute("user",user);
+           Message msg = new Message();
+           msg.setContent("Something Went Wrong!! "+e.getMessage());
+           msg.setType("alert-danger");
+           session.setAttribute("msg",msg);
+       }
         return "signup";
     }
     @GetMapping("/login")
