@@ -6,9 +6,11 @@ import com.smart.smartcontactmanager.helper.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +35,15 @@ public class Controller {
         return "signup";
     }
     @PostMapping("/register-user")
-    public String registerUser(@ModelAttribute("user") User user, @RequestParam(value = "agreement",defaultValue = "false") boolean agreement, Model model, HttpSession session){
+    public String registerUser(@Valid @ModelAttribute("user") User user,BindingResult result, @RequestParam(value = "agreement",defaultValue = "false") boolean agreement, Model model, HttpSession session){
        try{
            if(!agreement){
                throw new Exception("You have not check me out");
+           }
+
+           if (result.hasErrors()){
+               model.addAttribute("user",user);
+               return "signup";
            }
            user.setRole("ROLE_USER");
            user.setEnabled(true);
