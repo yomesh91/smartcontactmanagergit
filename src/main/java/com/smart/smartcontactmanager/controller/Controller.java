@@ -50,7 +50,7 @@ public class Controller {
            user.setImageUrl("default.png");
            user.setPassword(passwordEncoder.encode(user.getPassword()));
            User user1 = userRepository.save(user);
-           model.addAttribute("user",user1);
+           /*model.addAttribute("user",user1);*/
            Message msg = new Message();
            msg.setContent("Successfully Registered!!");
            msg.setType("alert-success");

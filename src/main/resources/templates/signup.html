@@ -20,14 +20,15 @@
                         <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
                     </div>
                     <h1 class="text-center">Register here</h1>
-                    <form novalidate method="post" th:action="register-user" th:object="${user}">
+                    <form method="post" novalidate th:action="register-user" th:object="${user}">
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input aria-describedby="emailHelp" class="form-control"
                                    id="name" name="name"
-                                   placeholder="Enter Name" th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}" required
+                                   placeholder="Enter Name"
+                                   required th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
                                    th:value="${user.name}" type="text"/>
-                            <div class="invalid-feedback" th:each="e : ${#fields.errors('name')}"th:text="${e}">
+                            <div class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}">
 
                             </div>
 
@@ -36,29 +37,34 @@
                             <label for="exampleInputEmail1">Email address</label>
                             <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail1"
                                    name="email"
-                                   placeholder="Enter email" required th:value="${user.email}" type="email"/>
-
+                                   placeholder="Enter email"
+                                   required th:classappend="${#fields.hasErrors('email') ? 'is-invalid':''}"
+                                   th:value="${user.email}" type="email"/>
+                            <div class="invalid-feedback" th:each="e : ${#fields.errors('email')}" th:text="${e}">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <input class="form-control" id="exampleInputPassword1" name="password"
                                    placeholder="Password"
-                                   required th:value="${user.password}" type="password">
-                        </div>
-                        <div class="form-group">
+                                   required th:classappend="${#fields.hasErrors('password') ? 'is-invalid':''}"
+                                   th:value="${user.password}" type="password"/>
+                            <div class="invalid-feedback" th:each="e : ${#fields.errors('password')}" th:text="${e}">
+                            </div>
+                            <div class="form-group">
                             <textarea class="form-control" name="about" placeholder="Enter Something yourself"
                                       rows="10"
                                       th:text="${user.about}"></textarea>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" id="exampleCheck1" name="agreement"
-                                   type="checkbox">
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div>
-                        <div class="text-center">
-                            <button class="btn btn-primary" type="submit">Submit</button>
-                            <button class="btn btn-primary" type="reset">Reset</button>
-                        </div>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" id="exampleCheck1" name="agreement"
+                                       type="checkbox">
+                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                                <button class="btn btn-primary" type="reset">Reset</button>
+                            </div>
                     </form>
                 </div>
             </div>
