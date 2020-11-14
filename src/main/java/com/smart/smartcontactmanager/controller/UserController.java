@@ -1,5 +1,6 @@
 package com.smart.smartcontactmanager.controller;
 
+import com.smart.smartcontactmanager.dao.ContactRepositry;
 import com.smart.smartcontactmanager.dao.UserRepository;
 import com.smart.smartcontactmanager.entities.Contact;
 import com.smart.smartcontactmanager.entities.User;
@@ -18,12 +19,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ContactRepositry contactRepositry;
 
     @ModelAttribute
     public void addCommonData(Model model, Principal principal) {
@@ -77,6 +81,15 @@ public class UserController {
             session.setAttribute("message", new Message("Something Went Wrong..","danger"));
         }
         return "normal/add_contact";
+    }
+    @GetMapping("/show-contacts")
+    public String showContacts(Model model,Principal principal){
+        model.addAttribute("title","Show User contacts");
+        String email = principal.getName();
+        User user = userRepository.getUserByUserName(email);
+        List<Contact> contacts = contactRepositry.findContactByUser(user.getId());
+        model.addAttribute("contacts",contacts);
+        return "normal/show_contacts";
     }
 
 }
