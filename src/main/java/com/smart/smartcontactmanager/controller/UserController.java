@@ -64,6 +64,7 @@ public class UserController {
             //file uploding
             if (file.isEmpty()) {
                 System.out.println("file is empty");
+                contact.setImage("contact.png");
 
             } else {
                 contact.setImage(file.getOriginalFilename());

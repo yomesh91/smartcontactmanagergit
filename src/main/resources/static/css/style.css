@@ -78,3 +78,9 @@ right: 35px;
 font-size: 36px;
 cursor: pointer;
 }
+.my_profile_picture{
+width: 35px;
+height: 35px;
+object-fit:cover;
+border-radius:50%;
+}

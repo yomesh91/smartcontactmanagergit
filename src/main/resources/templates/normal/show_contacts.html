@@ -28,9 +28,12 @@
                 <tbody>
                 <tr th:each="c : ${contacts}">
                     <th scope="row" th:text="${'SCMUSER'+c.conId}">1</th>
-                    <td th:text="${c.name}"></td>
-                    <td th:text="${c.email}">Otto</td>
-                    <td th:text="${c.phone}">@mdo</td>
+                    <td>
+                        <img class="my_profile_picture" th:src="@{'/images/'+${c.image}}" alt="profile photo">
+                        <span th:text="${c.name}"></span>
+                    </td>
+                    <td th:text="${c.email}"></td>
+                    <td th:text="${c.phone}"></td>
                     <td>
                         <button class="btn btn-outline-danger btn-sm">Delete</button>
                         <button class="btn btn-outline-primary btn-sm">Edit</button>
