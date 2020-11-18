@@ -77,7 +77,6 @@ public class UserController {
             contact.setUser(user);
             user.getContacts().add(contact);
             userRepository.save(user);
-            System.out.println(contact);
             System.out.println("Added to database");
             session.setAttribute("message", new Message("Your Contact is Added Successfully..","success"));
         } catch (Exception e) {
@@ -113,11 +112,16 @@ public class UserController {
             return "normal/contact_detail";
     }
     @GetMapping("/delete/{conId}")
-    public String deleteContact(@PathVariable("conId") Integer conId,Model model,HttpSession session){
+    public String deleteContact(@PathVariable("conId") Integer conId,Model model,Principal principal, HttpSession session){
         Optional<Contact> optionalContact = contactRepositry.findById(conId);
         Contact contact = optionalContact.get();
-        contactRepositry.delete(contact);
-        session.setAttribute("message",new Message("Contact deleted succesfully","success"));
+
+        String email = principal.getName();
+        User user = userRepository.getUserByUserName(email);
+        if(user.getId() == contact.getUser().getId()) {
+            contactRepositry.delete(contact);
+            session.setAttribute("message", new Message("Contact deleted succesfully", "success"));
+        }
         return "redirect:/user/show-contacts/0";
     }
 
