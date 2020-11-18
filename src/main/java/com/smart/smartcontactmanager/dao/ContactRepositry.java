@@ -11,5 +11,5 @@ import java.util.List;
 
 public interface ContactRepositry extends JpaRepository<Contact,Integer> {
     @Query("from Contact as c where c.user.id=:userId")
-    public Page<Contact> findContactByUser(@Param("userId") int userId, Pageable pageable                                                                                                           );
+    public Page<Contact> findContactByUser(@Param("userId") int userId, Pageable pageable);
 }

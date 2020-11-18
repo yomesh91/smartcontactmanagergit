@@ -7,7 +7,9 @@
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+          rel="stylesheet"/>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <title th:text="${title}">Base</title>
 </head>
@@ -27,15 +29,16 @@
                 <a class="nav-link font-weight-bold ml-3" th:href="@{/}">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link font-weight-bold ml-3" th:href="@{/logout}">Logout<span class="sr-only">(current)</span></a>
+                <a class="nav-link font-weight-bold ml-3" th:href="@{/logout}">Logout<span
+                        class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>
 </nav>
 <div class="sidebar mt-2">
-    <span onclick="toggleSidebar()" class="crossbtn">&times;</span>
+    <span class="crossbtn" onclick="toggleSidebar()">&times;</span>
     <a class="item font-weight-bold" th:href="@{/user/index}"><i class="fas fa-home"></i>Home</a>
-    <a class="item font-weight-bold" th:href="@{/user/show-contacts}"><i class="fas fa-id-card-alt"></i>View Contacts</a>
+    <a class="item font-weight-bold" th:href="@{/user/show-contacts/0}"><i class="fas fa-id-card-alt"></i>View Contacts</a>
     <a class="item font-weight-bold" th:href="@{/user/add-contact}"><i class="fas fa-pencil-alt"></i>Add Contacts</a>
     <a class="item font-weight-bold" href="#"><i class="fas fa-user-circle"></i>Your Profile</a>
     <a class="item font-weight-bold" href="#"><i class="fas fa-cog"></i>Settings</a>
@@ -44,13 +47,13 @@
 
 </div>
 <div class="section mt-5">
-    <i onclick="toggleSidebar()" class="fas fa-bars m-3"></i>
-   <div th:if="${session.message}" class="container">
-       <div th:classappend="${'alert-'+session.message.type}" class="alert text-center" role="alert">
-           <span th:text="${session.message.content}"></span>
-       </div>
-       <th:block th:text="${#session.removeAttribute('message')}"></th:block>
-   </div>
+    <i class="fas fa-bars m-3" onclick="toggleSidebar()"></i>
+    <div class="container" th:if="${session.message}">
+        <div class="alert text-center" role="alert" th:classappend="${'alert-'+session.message.type}">
+            <span th:text="${session.message.content}"></span>
+        </div>
+        <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+    </div>
     <div th:replace="${section}"></div>
 </div>
 <script crossorigin="anonymous"
@@ -62,6 +65,29 @@
 <script crossorigin="anonymous"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    function deleteContact(conId)
+    {
+    swal({
+    title: "Are you sure?",
+    text: "You want to delete this contact..",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+    })
+    .then((willDelete) => {
+    if (willDelete) {
+
+        window.location="/user/delete/"+conId;
+
+    } else {
+        swal("Your contact is safe!!");
+    }
+    });
+    }
+</script>
 <script th:src="@{/js/script.js}"></script>
 </body>
 </html>

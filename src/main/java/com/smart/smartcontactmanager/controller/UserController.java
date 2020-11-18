@@ -23,6 +23,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")
@@ -97,6 +98,27 @@ public class UserController {
         model.addAttribute("currentPage",page);
         model.addAttribute("totalPages",contacts.getTotalPages());
         return "normal/show_contacts";
+    }
+    @GetMapping("/contact/{conId}")
+    public String showContactDetailById(@PathVariable("conId") Integer conId,Model model,Principal principal){
+        Optional<Contact> optionalContact = contactRepositry.findById(conId);
+        Contact contact = optionalContact.get();
+
+        String email = principal.getName();
+        User user = userRepository.getUserByUserName(email);
+        if (user.getId() == contact.getUser().getId()) {
+            model.addAttribute("contact", contact);
+            model.addAttribute("title",contact.getName());
+        }
+            return "normal/contact_detail";
+    }
+    @GetMapping("/delete/{conId}")
+    public String deleteContact(@PathVariable("conId") Integer conId,Model model,HttpSession session){
+        Optional<Contact> optionalContact = contactRepositry.findById(conId);
+        Contact contact = optionalContact.get();
+        contactRepositry.delete(contact);
+        session.setAttribute("message",new Message("Contact deleted succesfully","success"));
+        return "redirect:/user/show-contacts/0";
     }
 
 }
