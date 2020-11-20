@@ -5,17 +5,24 @@
     <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
           name="viewport">
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
-
-
-    <title>Document</title>
+    <title>Home Page</title>
 </head>
 <body>
 <section>
-
-            <h3>User Name is <span th:text="${user.name}"></span></h3>
-            <h3>User email is <span th:text="${user.email}"></span></h3>
-
-
+    <div class="container">
+        <div class="card">
+            <div class="card-body my-5">
+                <div class="container text-center">
+                    <img alt="profile photo" class="my_profile_picture"
+                         style="height: 200px; width: 200px;" th:src="@{'/images/default.png'}">
+                    <h1 class="text-center mt-3 text-secondary font-italic">
+                        Start Adding Your Contact On Cloud....
+                    </h1>
+                    <a th:href="@{/user/add-contact}" class="btn btn-outline-primary mt-4 text-uppercase">Add new contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 </body>
 </html>
