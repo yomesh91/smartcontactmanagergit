@@ -1,5 +1,7 @@
 package com.smart.smartcontactmanager.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,6 +19,7 @@ public class Contact {
     @Column(length = 5000)
     private String description;
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     public int getConId() {
